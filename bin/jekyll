@@ -106,6 +106,10 @@ opts = OptionParser.new do |opts|
   opts.on("--permalink [TYPE]", "Use 'date' (default) for YYYY/MM/DD") do |style|
     options['permalink'] = style unless style.nil?
   end
+
+  opts.on("--multiviews", "Don't use .html in links for prettier urls") do |style|
+    options['multiviews'] = true
+  end
   
   opts.on("--paginate [POSTS_PER_PAGE]", "Paginate a blog's posts") do |per_page|
     begin

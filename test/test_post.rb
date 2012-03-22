@@ -200,6 +200,19 @@ class TestPost < Test::Unit::TestCase
             assert_equal "/prefix/foo-bar", @post.url
           end
         end
+
+        context "with multiviews options enabled" do
+          setup do
+            @post.site.permalink_style = "/prefix/:title.html"
+            @post.site.config['multiviews'] = true
+            @post.process(@fake_file)
+          end
+
+          should "process the url correctly" do
+            assert_equal "/prefix/:title.html", @post.template
+            assert_equal "/prefix/foo-bar", @post.url
+          end
+        end
       end
 
       should "read yaml front-matter" do
