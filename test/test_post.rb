@@ -387,6 +387,17 @@ class TestPost < Test::Unit::TestCase
           assert File.exists?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
+        should "write properly with multiviews enabled" do
+          post = setup_post("2008-10-18-foo-bar.textile")
+          post.site.permalink_style = ":title.html"
+          post.site.config['multiviews'] = true
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exists?(File.join(dest_dir, 'foo-bar.html'))
+        end
+
         should "insert data" do
           post = setup_post("2008-11-21-complex.textile")
           do_render(post)
